@@ -46,7 +46,8 @@ function App() {
         .from('fotocopie_docenti')
         .update({
           disponibile: 50,
-          utilizzato: 0
+          utilizzato: 0,
+          ultimo_aggiornamento: new Date().toISOString()
         })
         .gte('id', 1)
 
@@ -100,7 +101,8 @@ function App() {
         .from('fotocopie_docenti')
         .update({ 
           disponibile: docente.disponibile - nuoveFotocopie,
-          utilizzato: (docente.utilizzato || 0) + parseInt(nuoveFotocopie)
+          utilizzato: (docente.utilizzato || 0) + parseInt(nuoveFotocopie),
+          ultimo_aggiornamento: new Date().toISOString()
         })
         .eq('id', id)
 
@@ -115,7 +117,6 @@ function App() {
       alert('Errore: ' + e.message)
     }
   }
-
   return (
     <div className="container" style={{ padding: '20px' }}>
       <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Gestione Fotocopie Docenti</h1>
