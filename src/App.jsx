@@ -7,6 +7,9 @@ function App() {
   const [fotocopieUsate, setFotocopieUsate] = useState({})
   const [loading, setLoading] = useState(false)
   const [refresh, setRefresh] = useState(0)
+  const [showPasswordDialog, setShowPasswordDialog] = useState(false)
+  const [password, setPassword] = useState('')
+  const [passwordError, setPasswordError] = useState('')
 
   useEffect(() => {
     fetchDatiDocenti()
@@ -61,6 +64,25 @@ function App() {
     }
   }
 
+  const handleInitClick = () => {
+    setShowPasswordDialog(true)
+    setPassword('')
+    setPasswordError('')
+  }
+
+  const handlePasswordSubmit = () => {
+    const ADMIN_PASSWORD = 'CDC1A2024'
+    
+    if (password === ADMIN_PASSWORD) {
+      setShowPasswordDialog(false)
+      inizializzaFotocopie()
+      setPassword('')
+      setPasswordError('')
+    } else {
+      setPasswordError('Password non corretta')
+    }
+  }
+
   async function aggiornaDatiDocente(id, nuoveFotocopie) {
     if (!nuoveFotocopie || nuoveFotocopie <= 0) {
       alert('Inserisci un numero valido di fotocopie')
@@ -99,7 +121,7 @@ function App() {
       <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Gestione Fotocopie Docenti</h1>
       
       <button 
-        onClick={inizializzaFotocopie}
+        onClick={handleInitClick}
         disabled={loading}
         style={{
           backgroundColor: loading ? '#cccccc' : '#007bff',
@@ -115,6 +137,86 @@ function App() {
       >
         {loading ? 'Inizializzazione in corso...' : 'Inizializza Fotocopie (50 per docente)'}
       </button>
+
+      {showPasswordDialog && (
+        <>
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            zIndex: 999
+          }} onClick={() => setShowPasswordDialog(false)} />
+          
+          <div style={{
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: 'white',
+            padding: '20px',
+            borderRadius: '8px',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+            zIndex: 1000,
+            width: '90%',
+            maxWidth: '500px'
+          }}>
+            <h2 style={{ marginBottom: '16px' }}>Conferma Inizializzazione</h2>
+            <p style={{ marginBottom: '16px' }}>
+              Questa azione resetterà il conteggio delle fotocopie per tutti i docenti.
+              Inserisci la password di amministrazione per continuare.
+            </p>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value)
+                setPasswordError('')
+              }}
+              placeholder="Inserisci password"
+              style={{
+                width: '100%',
+                padding: '8px',
+                marginBottom: '8px',
+                border: '1px solid #ccc',
+                borderRadius: '4px'
+              }}
+            />
+            {passwordError && (
+              <p style={{ color: 'red', marginBottom: '8px' }}>{passwordError}</p>
+            )}
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
+              <button
+                onClick={() => setShowPasswordDialog(false)}
+                style={{
+                  padding: '8px 16px',
+                  border: '1px solid #ccc',
+                  borderRadius: '4px',
+                  backgroundColor: 'white',
+                  cursor: 'pointer'
+                }}
+              >
+                Annulla
+              </button>
+              <button
+                onClick={handlePasswordSubmit}
+                style={{
+                  padding: '8px 16px',
+                  backgroundColor: '#007bff',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer'
+                }}
+              >
+                Conferma
+              </button>
+            </div>
+          </div>
+        </>
+      )}
 
       {datiDocenti ? (
         <div>
