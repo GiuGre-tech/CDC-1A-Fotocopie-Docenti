@@ -118,15 +118,24 @@ function App() {
     }
   }
   return (
-    <div className="container" style={{ padding: '20px' }}>
-      <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Gestione Fotocopie Docenti</h1>
+    <div className="container" style={{ 
+      padding: '20px',
+      backgroundColor: '#ffffff',
+      color: '#000000',
+      minHeight: '100vh'
+    }}>
+      <h1 style={{ 
+        textAlign: 'center', 
+        marginBottom: '20px',
+        color: '#000000'
+      }}>Gestione Fotocopie Docenti</h1>
       
       <button 
         onClick={handleInitClick}
         disabled={loading}
         style={{
           backgroundColor: loading ? '#cccccc' : '#007bff',
-          color: 'white',
+          color: '#ffffff',
           padding: '8px 16px',
           border: 'none',
           borderRadius: '4px',
@@ -156,16 +165,17 @@ function App() {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            backgroundColor: 'white',
+            backgroundColor: '#ffffff',
+            color: '#000000',
             padding: '20px',
             borderRadius: '8px',
-            boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.3)',
             zIndex: 1000,
             width: '90%',
             maxWidth: '500px'
           }}>
-            <h2 style={{ marginBottom: '16px' }}>Conferma Inizializzazione</h2>
-            <p style={{ marginBottom: '16px' }}>
+            <h2 style={{ marginBottom: '16px', color: '#000000' }}>Conferma Inizializzazione</h2>
+            <p style={{ marginBottom: '16px', color: '#000000' }}>
               Questa azione resetterà il conteggio delle fotocopie per tutti i docenti.
               Inserisci la password di amministrazione per continuare.
             </p>
@@ -182,11 +192,13 @@ function App() {
                 padding: '8px',
                 marginBottom: '8px',
                 border: '1px solid #ccc',
-                borderRadius: '4px'
+                borderRadius: '4px',
+                backgroundColor: '#ffffff',
+                color: '#000000'
               }}
             />
             {passwordError && (
-              <p style={{ color: 'red', marginBottom: '8px' }}>{passwordError}</p>
+              <p style={{ color: '#ff0000', marginBottom: '8px' }}>{passwordError}</p>
             )}
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
               <button
@@ -195,7 +207,8 @@ function App() {
                   padding: '8px 16px',
                   border: '1px solid #ccc',
                   borderRadius: '4px',
-                  backgroundColor: 'white',
+                  backgroundColor: '#ffffff',
+                  color: '#000000',
                   cursor: 'pointer'
                 }}
               >
@@ -206,7 +219,7 @@ function App() {
                 style={{
                   padding: '8px 16px',
                   backgroundColor: '#007bff',
-                  color: 'white',
+                  color: '#ffffff',
                   border: 'none',
                   borderRadius: '4px',
                   cursor: 'pointer'
@@ -220,29 +233,29 @@ function App() {
       )}
 
       {datiDocenti ? (
-        <div>
-          <table style={{ borderCollapse: 'collapse', width: '100%', backgroundColor: 'white' }}>
+        <div style={{ backgroundColor: '#ffffff', padding: '16px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+          <table style={{ borderCollapse: 'collapse', width: '100%', backgroundColor: '#ffffff', color: '#000000' }}>
             <thead>
               <tr>
-                <th style={{ border: '1px solid black', padding: '8px', backgroundColor: '#f2f2f2' }}>ID</th>
-                <th style={{ border: '1px solid black', padding: '8px', backgroundColor: '#f2f2f2' }}>Nome</th>
-                <th style={{ border: '1px solid black', padding: '8px', backgroundColor: '#f2f2f2' }}>Materia</th>
-                <th style={{ border: '1px solid black', padding: '8px', backgroundColor: '#f2f2f2' }}>Disponibile</th>
-                <th style={{ border: '1px solid black', padding: '8px', backgroundColor: '#f2f2f2' }}>Utilizzato</th>
-                <th style={{ border: '1px solid black', padding: '8px', backgroundColor: '#f2f2f2' }}>Fotocopie da utilizzare</th>
-                <th style={{ border: '1px solid black', padding: '8px', backgroundColor: '#f2f2f2' }}>Azione</th>
-                <th style={{ border: '1px solid black', padding: '8px', backgroundColor: '#f2f2f2' }}>Ultimo Aggiornamento</th>
+                <th style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#f8f9fa', color: '#000000' }}>ID</th>
+                <th style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#f8f9fa', color: '#000000' }}>Nome</th>
+                <th style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#f8f9fa', color: '#000000' }}>Materia</th>
+                <th style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#f8f9fa', color: '#000000' }}>Disponibile</th>
+                <th style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#f8f9fa', color: '#000000' }}>Utilizzato</th>
+                <th style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#f8f9fa', color: '#000000' }}>Fotocopie da utilizzare</th>
+                <th style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#f8f9fa', color: '#000000' }}>Azione</th>
+                <th style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#f8f9fa', color: '#000000' }}>Ultimo Aggiornamento</th>
               </tr>
             </thead>
             <tbody>
               {datiDocenti.map((docente) => (
                 <tr key={docente.id}>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{docente.id}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{docente.nome}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{docente.materia}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{docente.disponibile || 0}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{docente.utilizzato || 0}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>
+                  <td style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#ffffff', color: '#000000' }}>{docente.id}</td>
+                  <td style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#ffffff', color: '#000000' }}>{docente.nome}</td>
+                  <td style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#ffffff', color: '#000000' }}>{docente.materia}</td>
+                  <td style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#ffffff', color: '#000000' }}>{docente.disponibile || 0}</td>
+                  <td style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#ffffff', color: '#000000' }}>{docente.utilizzato || 0}</td>
+                  <td style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#ffffff', color: '#000000' }}>
                     <input
                       type="number"
                       min="1"
@@ -252,15 +265,21 @@ function App() {
                         ...fotocopieUsate,
                         [docente.id]: e.target.value
                       })}
-                      style={{ width: '80px', padding: '4px' }}
+                      style={{ 
+                        width: '80px', 
+                        padding: '4px',
+                        backgroundColor: '#ffffff',
+                        color: '#000000',
+                        border: '1px solid #cccccc'
+                      }}
                     />
                   </td>
-                  <td style={{ border: '1px solid black', padding: '8px', textAlign: 'center' }}>
+                  <td style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#ffffff', color: '#000000', textAlign: 'center' }}>
                     <button
                       onClick={() => aggiornaDatiDocente(docente.id, parseInt(fotocopieUsate[docente.id] || 0))}
                       style={{
                         backgroundColor: '#4CAF50',
-                        color: 'white',
+                        color: '#ffffff',
                         padding: '5px 10px',
                         border: 'none',
                         borderRadius: '3px',
@@ -270,27 +289,26 @@ function App() {
                       Aggiorna
                     </button>
                   </td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>
+                  <td style={{ border: '2px solid #cccccc', padding: '8px', backgroundColor: '#ffffff', color: '#000000' }}>
                     {new Date(docente.ultimo_aggiornamento).toLocaleDateString()}
                   </td>
                 </tr>
               ))}
-              {/* Riga dei totali */}
               <tr style={{ backgroundColor: '#f8f9fa', fontWeight: 'bold' }}>
-                <td style={{ border: '1px solid black', padding: '8px' }} colSpan="3">Totali</td>
-                <td style={{ border: '1px solid black', padding: '8px' }}>
+                <td style={{ border: '2px solid #cccccc', padding: '8px', color: '#000000' }} colSpan="3">Totali</td>
+                <td style={{ border: '2px solid #cccccc', padding: '8px', color: '#000000' }}>
                   {datiDocenti?.reduce((acc, doc) => acc + (doc.disponibile || 0), 0)}
                 </td>
-                <td style={{ border: '1px solid black', padding: '8px' }}>
+                <td style={{ border: '2px solid #cccccc', padding: '8px', color: '#000000' }}>
                   {datiDocenti?.reduce((acc, doc) => acc + (doc.utilizzato || 0), 0)}
                 </td>
-                <td style={{ border: '1px solid black', padding: '8px' }} colSpan="3"></td>
+                <td style={{ border: '2px solid #cccccc', padding: '8px', color: '#000000' }} colSpan="3"></td>
               </tr>
             </tbody>
           </table>
         </div>
       ) : (
-        <p>Caricamento dati...</p>
+        <p style={{ color: '#000000' }}>Caricamento dati...</p>
       )}
     </div>
   )
