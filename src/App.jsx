@@ -10,6 +10,7 @@ function App() {
   const [showPasswordDialog, setShowPasswordDialog] = useState(false)
   const [password, setPassword] = useState('')
   const [passwordError, setPasswordError] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
     fetchDatiDocenti()
@@ -128,7 +129,7 @@ function App() {
         textAlign: 'center', 
         marginBottom: '20px',
         color: '#000000'
-      }}>Gestione Fotocopie Docenti</h1>
+      }}>Gestione Fotocopie Docenti 1A</h1>
       
       <button 
         onClick={handleInitClick}
@@ -179,37 +180,66 @@ function App() {
               Questa azione resetterà il conteggio delle fotocopie per tutti i docenti.
               Inserisci la password di amministrazione per continuare.
             </p>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value)
-                setPasswordError('')
-              }}
-              placeholder="Inserisci password"
-              style={{
-                width: '100%',
-                padding: '8px',
-                marginBottom: '8px',
-                border: '1px solid #ccc',
-                borderRadius: '4px',
-                backgroundColor: '#ffffff',
-                color: '#000000'
-              }}
-            />
+            <div style={{
+              position: 'relative',
+              width: '100%',
+              marginBottom: '8px'
+            }}>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value)
+                  setPasswordError('')
+                }}
+                placeholder="Inserisci password"
+                style={{
+                  width: '100%',
+                  padding: '8px 32px 8px 12px',
+                  border: '1px solid #ccc',
+                  borderRadius: '4px',
+                  backgroundColor: '#ffffff',
+                  color: '#000000'
+                }}
+              />
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowPassword(!showPassword)
+                }}
+                style={{
+                  position: 'absolute',
+                  right: '8px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  border: 'none',
+                  background: 'none',
+                  cursor: 'pointer',
+                  padding: '4px',
+                  color: '#000000'
+                }}
+              >
+                {showPassword ? '👁️' : '👁️‍🗨️'}
+              </button>
+            </div>
             {passwordError && (
               <p style={{ color: '#ff0000', marginBottom: '8px' }}>{passwordError}</p>
             )}
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
               <button
-                onClick={() => setShowPasswordDialog(false)}
+                onClick={() => {
+                  setShowPasswordDialog(false)
+                  setPassword('')
+                  setPasswordError('')
+                }}
                 style={{
                   padding: '8px 16px',
                   border: '1px solid #ccc',
                   borderRadius: '4px',
                   backgroundColor: '#ffffff',
                   color: '#000000',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  display: 'block'
                 }}
               >
                 Annulla
@@ -222,7 +252,8 @@ function App() {
                   color: '#ffffff',
                   border: 'none',
                   borderRadius: '4px',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  display: 'block'
                 }}
               >
                 Conferma
