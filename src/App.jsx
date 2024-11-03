@@ -128,7 +128,7 @@ function App() {
         textAlign: 'center', 
         marginBottom: '20px',
         color: '#000000'
-      }}>Gestione Fotocopie Docenti</h1>
+      }}>Gestione Fotocopie Docenti 1A</h1>
       
       <button 
         onClick={handleInitClick}
@@ -172,7 +172,7 @@ function App() {
             boxShadow: '0 2px 10px rgba(0,0,0,0.3)',
             zIndex: 1000,
             width: '90%',
-            maxWidth: '500px'
+            maxWidth: '400px'  // Ridotto da 500px
           }}>
             <h2 style={{ marginBottom: '16px', color: '#000000' }}>Conferma Inizializzazione</h2>
             <p style={{ marginBottom: '16px', color: '#000000' }}>
@@ -188,28 +188,37 @@ function App() {
               }}
               placeholder="Inserisci password"
               style={{
-                width: '100%',
+                width: '80%',  // Ridotto da 100%
                 padding: '8px',
                 marginBottom: '8px',
                 border: '1px solid #ccc',
                 borderRadius: '4px',
                 backgroundColor: '#ffffff',
-                color: '#000000'
+                color: '#000000',
+                display: 'block',
+                margin: '0 auto'
               }}
             />
             {passwordError && (
               <p style={{ color: '#ff0000', marginBottom: '8px' }}>{passwordError}</p>
             )}
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', marginTop: '16px' }}>
               <button
-                onClick={() => setShowPasswordDialog(false)}
+                onClick={() => {
+                  setShowPasswordDialog(false)
+                  setPassword('')
+                  setPasswordError('')
+                }}
                 style={{
                   padding: '8px 16px',
                   border: '1px solid #ccc',
                   borderRadius: '4px',
                   backgroundColor: '#ffffff',
                   color: '#000000',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  minWidth: '80px',
+                  fontWeight: '500',
+                  display: 'block'
                 }}
               >
                 Annulla
@@ -222,7 +231,9 @@ function App() {
                   color: '#ffffff',
                   border: 'none',
                   borderRadius: '4px',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  minWidth: '80px',
+                  display: 'block'
                 }}
               >
                 Conferma
